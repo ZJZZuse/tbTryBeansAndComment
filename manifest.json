@@ -1,0 +1,76 @@
+{
+  // ������ֶ�
+  "name": "tb try beans",
+  "version": "0.1.0",
+  "manifest_version": 2,
+  // �����ṩ���ֶ�
+  //"description": "A plain text description",
+  //"icons": { },
+  //"default_locale": "en",
+  // ��ѡһ�����߶����ṩ
+  //"browser_action": {},
+  //"page_action": {},
+  //"theme": {},
+  //"app": {},
+  // ������Ҫ�ṩ
+
+//  "background": {
+//    "scripts": [
+//      "background.js"
+//    ]
+//  },
+  "content_scripts": [
+    //    {
+    //      "matches": [
+    //        "https://*/*"
+    //      ],
+    //      "js": [
+    //        "jquery.min.js",
+    //        "async.js",
+    //        "myCommonToolsZ.js"
+    //      ]
+    //    },
+    {
+      "matches": [
+        "https://bbs.taobao.com/catalog/10198510.htm*"
+      ],
+      "js": [
+        "jquery.min.js",
+        "async.js",
+        "myCommonToolsZ.js",
+        "mainListContent.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://bbs.taobao.com/catalog/thread*"
+      ],
+      "js": [
+        "jquery.min.js",
+        "myCommonToolsZ.js",
+        "certainItemContent.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://try.taobao.com/report/report_detail.htm*"
+      ],
+      "js": [
+        "jquery.min.js",
+        "myCommonToolsZ.js",
+        "certainCommont.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  //  "key": "publicKey",
+  "permissions": [
+    //    "background",
+    "http://*/*",
+    "https://*/*",
+    "background"
+  ],
+  "requirements": {}
+}  
