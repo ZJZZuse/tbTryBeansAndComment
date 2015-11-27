@@ -23,7 +23,10 @@
       setStrT = function() {
         var backText;
         backText = $('.J_CancelDig').text().trim() + ',' + $('.comment-list>li:first .words').text().trim() + ' @' + $('.comment-list>li:first .time').text().trim() + ' by ' + sayer;
-        setDownTextAreText(backText);
+        chrome.extension.sendMessage({
+          type: 'doComm',
+          data: backText
+        });
         return setTimeout(function() {
           return close();
         }, 1000);

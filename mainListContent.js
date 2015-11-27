@@ -18,7 +18,10 @@
     return async.mapLimit(effectiveUrls, 1, function(url, callback) {
       var w;
       w = open(url);
-      return w.callBackT = callback;
+      return chrome.extension.sendMessage({
+        type: 'main',
+        data: callback
+      });
     }, function(err, result) {
       return $("body").prepend("done,count is " + result.length);
     });

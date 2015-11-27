@@ -29,7 +29,9 @@ onReady = ->
       setStrT = ->
         backText = $('.J_CancelDig').text().trim() + ',' + $('.comment-list>li:first .words').text().trim() + ' @' + $('.comment-list>li:first .time').text().trim() + ' by ' + sayer
 
-        setDownTextAreText(backText)
+#        chrome.extension.getBackgroundPage().setDownTextAreText(backText)
+
+        chrome.extension.sendMessage({type: 'doComm', data: backText})
 
         setTimeout(
           ->

@@ -25,7 +25,8 @@ onReady = ->
 
   win = open(url)
 
-  win.setDownTextAreText = setDownTextAreText
+
+  chrome.extension.sendMessage({type: 'cert', data: setDownTextAreText})
 
   setDownTextAreText = (text)->
 

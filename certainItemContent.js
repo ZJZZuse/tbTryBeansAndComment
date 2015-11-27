@@ -19,7 +19,10 @@
       }, 1000);
     });
     win = open(url);
-    win.setDownTextAreText = setDownTextAreText;
+    chrome.extension.sendMessage({
+      type: 'cert',
+      data: setDownTextAreText
+    });
     return setDownTextAreText = function(text) {
       var textT;
       textT = text + ',麻烦回赞，' + $('.goalUrlM', opener.document).val().trim();

@@ -13,7 +13,9 @@ onReady = ->
     (url, callback)->
       w = open(url)
 
-      w.callBackT = callback
+
+      chrome.extension.sendMessage({type: 'main', data: callback})
+
 
 #      callBackT = ->
 #        callback(null, url)
