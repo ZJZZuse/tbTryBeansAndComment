@@ -1,21 +1,31 @@
-
+mainTabId = null
+certTabId = null
 
 doMain = (obj)->
-  window.callBackForMain = obj.data
+  mainTabId = obj.data
 
 doCert = (obj)->
-  window.setDownTextAreText = obj.data
+  certTabId = obj.data
 
 doComm = (obj)->
-  window.setDownTextAreText(obj.data)
+  chrome.tabs.sendMessage(certTabId, {action: 'doCert'})
 
 
 chrome.extension.onMessage.addListener(
-  (obj)->
+  (obj, sender)->
     switch obj.type
-      when 'main' then doMain(obj)
-      when 'cert' then doCert(obj)
-      when 'doComm' then doComm(obj)
+      when 'main'
+        mainTabId = sender.tab.id
+
+
+      when 'cert'
+        certTabId = sender.tab.id
+      when 'doComm'
+
+        chrome.tabs.sendMessage(certTabId, {action: 'doCert', data: obj.data})
+
+#      when 'certToMain'
+#        chrome.tabs.sendMessage(mainTabId, {action: 'doCertToMain',data:obj.data})
 )
 
 #chrome.extension

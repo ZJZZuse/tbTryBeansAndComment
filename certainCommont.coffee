@@ -57,3 +57,4 @@ myCommonToolsZ.fireActionByCusCondition(
 #    chrome.extension.sendRequest({a: 'a'})
     onReady()
 )
+

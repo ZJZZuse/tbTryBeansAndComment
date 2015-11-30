@@ -19,7 +19,6 @@
       "background.js"
     ]
   },
-
   "content_scripts": [
     //    {
     //      "matches": [
@@ -64,14 +63,25 @@
         "certainCommont.js"
       ],
       "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://bbs.taobao.com/catalog/reply_success/*"
+      ],
+      "js": [
+        "selfClose.js"
+      ],
+      "run_at": "document_end"
     }
   ],
   //  "key": "publicKey",
   "permissions": [
-    //    "background",
+    "background",
+    "tabs",
     "http://*/*",
-    "https://*/*",
-    "background"
+    "https://*/*"
+    //  ,
+    //    "background"
   ],
   "requirements": {}
 }  

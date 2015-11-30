@@ -52,6 +52,14 @@
         gStrs.push(str);
       }
       return gStrs.join("");
+    },
+    insertBtn: function(text, action) {
+      var idT;
+      idT = "myActionBtn" + new Date().getTime();
+      $("body").prepend('<button id = ' + idT + '>' + text + '</button>');
+      return setTimeout(function() {
+        return $('#' + idT).on('click', action);
+      }, 500);
     }
   };
 

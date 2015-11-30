@@ -1,10 +1,14 @@
+setDownTextAreTextMain = null
+
+goalUrl = localStorage.getItem('goalUrl')
+
 onReady = ->
   urlsT = $('.floor-wrap>div.bd:first a:first')
 
   if urlsT.length == 0 || urlsT.attr('href').indexOf('try.taobao.com/report/report_detail.htm') == -1
-
-    callBackT(null, 'no efficacious link')
+#    chrome.extension.sendMessage({type: 'certToMain', data: 'no link'})
     close()
+    return
 
 
   url = urlsT?.attr('href')
@@ -16,8 +20,7 @@ onReady = ->
   $('#submitBtn').on('click', ->
     setTimeout(
       ->
-
-        callBackT(null, goalText)
+        chrome.extension.sendMessage({type: 'certToMain', data: goalText})
         close()
 
     , 1000)
@@ -26,15 +29,23 @@ onReady = ->
   win = open(url)
 
 
-  chrome.extension.sendMessage({type: 'cert', data: setDownTextAreText})
+  chrome.extension.sendMessage({type: 'cert'})
 
   setDownTextAreText = (text)->
-
-    textT = text + ',麻烦回赞，' + $('.goalUrlM',opener.document).val().trim()
+    textT = text + ',麻烦回赞，' + goalUrl
+    # + $('.goalUrlM', opener.document).val().trim()
 
     $($('iframe')[0].contentWindow.document.getElementById('editorbodyid')).text(textT)
     goalText = textT
 
+    setTimeout(
+      ->
+        $('#submitBtn')[0].click()
+
+    , 1000
+    )
+
+  setDownTextAreTextMain = setDownTextAreText
 
 myCommonToolsZ.fireActionByCusCondition(
   ->
@@ -46,4 +57,16 @@ myCommonToolsZ.fireActionByCusCondition(
     onReady()
 )
 
+$('body').prepend('<input type="text" id="goalUrlText"></input>')
 
+myCommonToolsZ.insertBtn('save',
+  ->
+    localStorage.setItem('goalUrl',$('#goalUrlText').val())
+)
+
+chrome.extension.onMessage.addListener(
+  (obj)->
+    if obj.action == 'doCert'
+
+      setDownTextAreTextMain(obj.data)
+)

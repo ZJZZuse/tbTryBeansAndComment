@@ -1,0 +1,10 @@
+{
+  "version": 3,
+  "file": "selfClose.js",
+  "sourceRoot": "",
+  "sources": [
+    "selfClose.coffee"
+  ],
+  "names": [],
+  "mappings": ";AAAA;EAAA,UAAA,CACE,SAAA;IACE,MAAM,CAAC,SAAS,CAAC,WAAjB,CAA6B;MAAC,IAAA,EAAM,YAAP;MAAoB,IAAA,EAAK,cAAzB;KAA7B;WAEA,KAAA,CAAA;EAHF,CADF,EAME,GANF;AAAA"
+}

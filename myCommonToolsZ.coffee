@@ -39,3 +39,12 @@ window.myCommonToolsZ =
 
     gStrs.join("")
 
+  insertBtn: (text, action)->
+    idT = "myActionBtn" + new Date().getTime()
+
+    $("body").prepend('<button id = ' + idT + '>' + text + '</button>');
+
+    setTimeout(
+      ->
+        $('#' + idT).on('click', action)
+    , 500)

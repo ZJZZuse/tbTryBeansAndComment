@@ -1,3 +1,7 @@
+callBackMain = ->
+
+
+
 onReady = ->
   mainItems = $('table.posts:eq(1) tr>td.subject')
 
@@ -13,9 +17,16 @@ onReady = ->
     (url, callback)->
       w = open(url)
 
+#      myCommonToolsZ.fireActionByCusCondition(
+#        ->
+#          w.closed
+#        ->
+#          callback(null,url)
+#      )
 
-      chrome.extension.sendMessage({type: 'main', data: callback})
+      chrome.extension.sendMessage({type: 'main'})
 
+      callBackMain = callback
 
 #      callBackT = ->
 #        callback(null, url)
@@ -45,12 +56,24 @@ onReady = ->
   )
 
 
+
+
 addCB = ->
   $('table.posts:eq(1) tr:first').remove()
 
 
   $('table.posts:eq(1) tr .subject>.detail').after(' <input type="checkbox" class="myPickCb"/> ')
 
+  $('table.posts:eq(1) tr .subject>.detail').after('<button class="openC">open</button>')
+
+  setTimeout(->
+    $('.openC').on('click',->
+
+
+
+    )
+  ,
+    500)
 
 main = ->
   $("body").prepend('<button id = "myActionBtn">action</button>');
@@ -62,6 +85,8 @@ main = ->
   #    #    callback(null, url)
   ##    callBackT()
   #  )
+
+
 
   setTimeout(
     ->
@@ -82,4 +107,15 @@ myCommonToolsZ.fireActionByCusCondition(
   ->
 #    chrome.extension.sendRequest({a: 'a'})
     addCB()
+)
+
+
+chrome.extension.onMessage.addListener(
+  (obj)->
+
+    if obj.action == 'doCertToMain'
+
+      callBackMain(null,obj.data)
+
+
 )
